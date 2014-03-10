@@ -3,7 +3,6 @@ class ZoomBlur extends CamMover {
   float record_time = 0;
   float spd = .05;
   float x = 0;
-  float y = 0;
   Wave spdWave;
   Wave pauseWave = new Wave(200, .1, 1000);
 
@@ -25,39 +24,14 @@ class ZoomBlur extends CamMover {
     add_action("noisemove", int(p));
     add_action("noisemove2", 1);
     add_action("noisemove", int(p));
-    //add_action("noisemove2", 1);
-//    add_action("noisemove", 1500);
-//    add_action("noisemove2", 1);
-
-
-    //add_action("zoomout", 1);
-    //add_action("zoomin", 3000);
-    //add_action("blur", 1000);
-    //add_action("autofocus", 1000);
-    //add_action("blur", 1000);
-    //add_action("autofocus", 1000);
-    
-    //add_action("focus", 1000);
-    //add_action("zoomout", 3000);
-    //add_action("zoomin", 3000);
   }
 
   void perform(Action a) {
     super.perform(a);
     println("moving");
     x+= abs(spdWave.wave());
-    y+=spd;
     cam.pan(noise(x) * -100);
     //cam.moveCam(noise(x) * -100, noise(y) * -50);
-    record_time = noise(x) * 3 + 1;
-
-    String to_record = noise(x) > .5 ? "zoomin" : "zoomout";
-
-    if (state == to_record) {
-      println("record time:" + record_time);
-      //cam.record(int(record_time));
-      //x += spd;
-    }
   }
   
   void update() {

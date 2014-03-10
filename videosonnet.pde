@@ -29,10 +29,10 @@ Cam cam;
 void setup() {
   size(WIDTH, HEIGHT);
   
-  json = loadJSONObject("data.json");
-  ip = json.getString("ip");
-  username = json.getString("username");
-  password = json.getString("password");
+  credentials = loadJSONObject("credentials.json");
+  ip = credentials.getString("ip");
+  username = credentials.getString("username");
+  password = credentials.getString("password");
   
   currentFrame = createImage(WIDTH, HEIGHT, RGB);
 

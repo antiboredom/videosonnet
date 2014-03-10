@@ -100,5 +100,3 @@ class Action {
     time = _time;
   }
 }
-
-
