@@ -1,10 +1,11 @@
 class Cam {
-  String username, password, ip, control_url, videostream;
+  String username, password, ip, control_url, operator_url, videostream;
   PVector pos = new PVector();
 
   Cam(String _ip, String _user, String _pass) {
     ip = _ip;
     control_url = "http://" + ip + "/axis-cgi/com/ptz.cgi?";
+    operator_url = "http://" + ip + "/axis-cgi/operator/param.cgi?";
     videostream = "http://" + ip + "/mjpg/video.mjpg";
     username = _user;
     password = _pass;
@@ -51,6 +52,10 @@ class Cam {
     command("areazoom=" + x + "," + y + ",800");
   }
 
+  void areazoom(float x, float y, int z) {
+    command("areazoom=" + x + "," + y + "," + z);
+  }
+  
   void autopan() {
     moveCam(pos.x, pos.y);
     pos.x += 50;
@@ -59,6 +64,11 @@ class Cam {
 
   void pan(float x) {
     command("pan=" + x);
+  }
+  
+  void tracking(boolean shouldTrack) {
+    String c = shouldTrack ? "yes" : "no";
+    operator("action=update%20&AutoTracking.A0.Running=" + c);
   }
 
 
@@ -71,12 +81,18 @@ class Cam {
       "--run-time", str(t)
       };
       exec(cmd);
+      println(t);
   }
 
 
   void command(String c) {
     println(c);
     authHTTPRequest(username, password, control_url + c);
+  }
+  
+  void operator(String c) {
+    println(c);
+    authHTTPRequest(username, password, operator_url + c);
   }
 }
 

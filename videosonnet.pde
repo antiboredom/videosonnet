@@ -23,7 +23,9 @@ OpenCV opencv;
 Rectangle[] faces;
 MJPEGParser parser;
 
-ZoomBlur conv;
+Conversation conv;
+//ZoomBlur conv;
+
 Cam cam;
 
 void setup() {
@@ -37,11 +39,13 @@ void setup() {
   currentFrame = createImage(WIDTH, HEIGHT, RGB);
 
   opencv = new OpenCV(this, WIDTH, HEIGHT);
-  opencv.loadCascade(OpenCV.CASCADE_PROFILEFACE);  
+  //opencv.loadCascade(OpenCV.CASCADE_PROFILEFACE);  
+  opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
 
   faces = new Rectangle[0];
   cam = new Cam(ip, username, password);
-  conv = new ZoomBlur(cam, -80, -20);
+  conv = new Conversation(cam, 160, 95);
+  //conv = new ZoomBlur(cam, 180, 130);
   parser = new MJPEGParser(cam.videostream, WIDTH, HEIGHT, username, password, this);
 }
 

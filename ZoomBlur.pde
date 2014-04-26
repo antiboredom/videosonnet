@@ -9,7 +9,7 @@ class ZoomBlur extends CamMover {
   ZoomBlur(Cam _cam, int _left, int _right) {
     super(_cam, _left, _right);
     spdWave = new Wave(0, .01, 2);
-    cam.record(120);
+    //cam.record(120);
   }
 
   void set_timing () {
@@ -30,7 +30,7 @@ class ZoomBlur extends CamMover {
     super.perform(a);
     println("moving");
     x+= abs(spdWave.wave());
-    cam.pan(noise(x) * -100);
+    cam.pan(noise(x) * 50 + 130);
     //cam.moveCam(noise(x) * -100, noise(y) * -50);
   }
   

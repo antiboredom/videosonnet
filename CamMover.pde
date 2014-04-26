@@ -75,6 +75,25 @@ class CamMover {
       println("darkening");
       cam.iris(1);
     }
+    
+    else if (a.name == "enabletracking") {
+      cam.tracking(true);
+    }
+    
+    else if (a.name == "disabletracking") {
+      cam.tracking(false);
+    }
+    
+    else if (a.name == "record") {
+      int time = 3;
+//      if (current_action < actions.size() - 2) {
+//        time = int((actions.get(current_action + 1).time - a.time)/1000);
+//        println(actions.get(current_action + 2).time);
+//        println(a.time);
+//      }
+      println ("recording");
+      cam.record(time); 
+    }
 
     state = a.name;
   }
